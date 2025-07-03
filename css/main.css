@@ -1,0 +1,123 @@
+/* Main Styles for Kids' Fun Zone */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f4f8; /* Light blue-grey background */
+}
+
+/* Custom message box container */
+.message-box-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.message-box-container.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Styling for the message box content */
+.message-box-content {
+    background-color: #ffffff;
+    padding: 2.5rem; /* Increased padding */
+    border-radius: 1.5rem; /* More rounded */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 95%; /* Allow wider for coloring game */
+    width: 900px; /* Wider for game/app content */
+    height: auto; /* Allow height to adjust to content */
+    max-height: 90vh; /* Max height to prevent overflow on small screens */
+    overflow-y: auto; /* Enable scrolling for longer content */
+    border: 4px solid #6366f1; /* Purple border */
+    display: flex; /* Use flex for content alignment */
+    flex-direction: column;
+    align-items: center;
+}
+
+.message-box-content h3 {
+    color: #4f46e5; /* Deep purple for title */
+    font-size: 1.875rem; /* Tailwind 'text-3xl' */
+    font-weight: 700; /* Tailwind 'font-bold' */
+    margin-bottom: 1rem;
+}
+
+.message-box-content p {
+    color: #374151; /* Dark grey for text */
+    font-size: 1.125rem; /* Tailwind 'text-lg' */
+    margin-bottom: 1.5rem;
+}
+
+.message-box-content button {
+    background-color: #6366f1; /* Purple button */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem; /* Rounded button */
+    font-weight: 600; /* Semi-bold */
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.message-box-content button:hover {
+    background-color: #4f46e5; /* Darker purple on hover */
+}
+
+/* Styles for the dynamically loaded game/app content area */
+.game-content-area {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: left; /* Default alignment */
+    padding: 0 1rem; /* Add some padding */
+}
+
+.game-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #a78bfa;
+    border-radius: 0.75rem;
+    text-align: center;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.game-message {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    color: #374151;
+    font-weight: 600;
+}
+
+/* Header and Footer */
+.main-header {
+    background-image: linear-gradient(to right, #8b5cf6, #6366f1); /* Default gradient */
+}
+
+.main-footer {
+    background-color: #1f2937; /* Default dark footer */
+}
+
+/* Common game elements */
+.score-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4f46e5;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.game-feedback {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    min-height: 1.5rem; /* Ensure space for messages */
+}
