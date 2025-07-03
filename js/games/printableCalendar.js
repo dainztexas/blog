@@ -385,5 +385,3 @@ export class PrintableCalendar extends Game {
         super.cleanup();
     }
 }
-
-export default PrintableCalendar;

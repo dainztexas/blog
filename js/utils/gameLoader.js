@@ -22,6 +22,10 @@ export class GameLoader {
         this.themeManager = themeManager;
         this.currentGame = null;
         
+        // Debug: Check if PrintableCalendar is available
+        console.log('PrintableCalendar import:', PrintableCalendar);
+        console.log('PrintableCalendar type:', typeof PrintableCalendar);
+        
         // Register available games
         this.games = new Map([
             ['guess-the-number', GuessNumberGame],
@@ -36,6 +40,10 @@ export class GameLoader {
             ['printable-calendar', PrintableCalendar],
             ['theme-selector', ThemeSelector]
         ]);
+        
+        // Debug: Log registered games
+        console.log('Registered games:', Array.from(this.games.keys()));
+        console.log('Has printable-calendar:', this.games.has('printable-calendar'));
     }
 
     /**
