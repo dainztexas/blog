@@ -139,36 +139,36 @@ export class PrintableCalendar extends Game {
                 </div>
 
                 <!-- Calendar Display Area (Printable) -->
-                <div class="max-w-6xl mx-auto printable-area bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden">
-                    <div class="p-6 md:p-10">
-                        <div class="flex flex-col md:flex-row justify-between items-center mb-6">
-                            <div class="text-center md:text-left">
-                                <h1 id="calendar-month" class="text-5xl md:text-7xl transition-colors duration-500 ${theme.header}" style="font-family: 'Pacifico', cursive">
+                <div class="w-full mx-auto printable-area bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="p-4 lg:p-6">
+                        <div class="flex flex-row justify-between items-center mb-4">
+                            <div class="text-left flex-1">
+                                <h1 id="calendar-month" class="text-4xl lg:text-6xl transition-colors duration-500 ${theme.header}" style="font-family: 'Pacifico', cursive">
                                     ${this.months[this.month]}
                                 </h1>
-                                <p id="calendar-year" class="text-2xl md:text-3xl font-semibold mt-1 transition-colors duration-500 ${theme.year}">
+                                <p id="calendar-year" class="text-xl lg:text-2xl font-semibold mt-1 transition-colors duration-500 ${theme.year}">
                                     ${this.year}
                                 </p>
                             </div>
                             
                             <!-- Placeholder for unicorn image -->
-                            <div class="w-48 h-32 md:w-64 md:h-48 mt-4 md:mt-0 flex items-center justify-center">
+                            <div class="w-32 h-24 lg:w-40 lg:h-32 flex items-center justify-center flex-shrink-0">
                                 <div class="w-full h-full bg-gradient-to-br from-pink-200 to-purple-200 rounded-2xl flex items-center justify-center shadow-lg">
-                                    <span class="text-6xl">🦄</span>
+                                    <span class="text-4xl lg:text-5xl">🦄</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-white/50 rounded-2xl border border-pink-200/50">
+                        <div class="bg-white/50 rounded-2xl border border-pink-200/50 w-full">
                             <!-- Week days header -->
                             <div id="week-header" class="grid grid-cols-7 text-center font-bold border-b-2 transition-colors duration-500 ${theme.weekDay} ${theme.borderHeader}">
                                 ${this.weekDays.map(day => `
-                                    <div class="p-3 border-r last:border-r-0 transition-colors duration-500 ${theme.border}">${day}</div>
+                                    <div class="p-2 lg:p-3 border-r last:border-r-0 transition-colors duration-500 ${theme.border} text-sm lg:text-base">${day}</div>
                                 `).join('')}
                             </div>
                             
                             <!-- Calendar grid -->
-                            <div id="calendar-grid" class="grid grid-cols-7" style="min-height: 384px;">
+                            <div id="calendar-grid" class="grid grid-cols-7 w-full" style="min-height: 300px;">
                                 <!-- Calendar days will be generated here -->
                             </div>
                         </div>
@@ -319,8 +319,8 @@ export class PrintableCalendar extends Game {
         // Days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             daysHTML += `
-                <div class="p-2 border-r border-b ${theme.border} h-24 md:h-28 flex flex-col">
-                    <span class="font-bold ${theme.day}">${day}</span>
+                <div class="p-1 lg:p-2 border-r border-b ${theme.border} h-20 lg:h-24 flex flex-col">
+                    <span class="font-bold ${theme.day} text-sm lg:text-base">${day}</span>
                     <div class="flex-grow"></div>
                 </div>
             `;
