@@ -86,7 +86,7 @@ export class PrintableCalendar extends Game {
             <div class="printable-calendar-container min-h-screen transition-colors duration-500 ${theme.bg}" style="font-family: ${this.fontFamily}">
                 
                 <!-- Controls Panel (No Print) -->
-                <div class="max-w-6xl mx-auto p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg mb-8 no-print">
+                <div class="max-w-7xl mx-auto p-4 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg mb-8 no-print">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 items-end">
                         <!-- Year Selector -->
                         <div>
