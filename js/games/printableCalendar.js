@@ -191,52 +191,61 @@ export class PrintableCalendar extends Game {
     bindEvents() {
         console.log('PrintableCalendar bindEvents called');
         
+        // Remove existing event listeners first to prevent duplicates
+        this.removeEventListeners();
+        
         try {
             // Year selector
             const yearSelect = document.getElementById('year-select');
             if (yearSelect) {
-                yearSelect.addEventListener('change', (e) => {
+                this.yearHandler = (e) => {
                     this.year = parseInt(e.target.value);
                     this.updateCalendar();
-                });
+                };
+                yearSelect.addEventListener('change', this.yearHandler);
             }
 
             // Month selector
             const monthSelect = document.getElementById('month-select');
             if (monthSelect) {
-                monthSelect.addEventListener('change', (e) => {
+                this.monthHandler = (e) => {
                     this.month = parseInt(e.target.value);
                     this.updateCalendar();
-                });
+                };
+                monthSelect.addEventListener('change', this.monthHandler);
             }
 
             // Font selector
             const fontSelect = document.getElementById('font-select');
             if (fontSelect) {
-                fontSelect.addEventListener('change', (e) => {
+                this.fontHandler = (e) => {
                     this.fontFamily = e.target.value;
                     this.updateStyles();
-                });
+                };
+                fontSelect.addEventListener('change', this.fontHandler);
             }
 
             // Theme selector
             const themeSelect = document.getElementById('theme-select');
             if (themeSelect) {
-                themeSelect.addEventListener('change', (e) => {
+                this.themeHandler = (e) => {
                     this.currentTheme = e.target.value;
                     this.updateTheme();
-                });
+                };
+                themeSelect.addEventListener('change', this.themeHandler);
             }
 
             // Print button
             const printBtn = document.getElementById('print-calendar-btn');
             if (printBtn) {
                 console.log('✅ Print button found, adding event listener');
-                printBtn.addEventListener('click', (e) => {
+                this.printHandler = (e) => {
                     console.log('🖨️ Print button clicked!');
                     e.preventDefault();
+                    e.stopPropagation();
                     this.printCalendar();
-                });
+                };
+                printBtn.addEventListener('click', this.printHandler);
             } else {
                 console.error('❌ Print button not found!');
             }
@@ -244,13 +253,43 @@ export class PrintableCalendar extends Game {
             // Image generation button (disabled)
             const imageBtn = document.getElementById('generate-image-btn');
             if (imageBtn) {
-                imageBtn.addEventListener('click', () => {
+                this.imageHandler = () => {
                     alert('🦄 Image generation feature will be available soon! For now, enjoy the cute unicorn emoji! 🌈');
-                });
+                };
+                imageBtn.addEventListener('click', this.imageHandler);
             }
 
         } catch (error) {
             console.error('Error binding printable calendar events:', error);
+        }
+    }
+
+    removeEventListeners() {
+        // Remove existing event listeners to prevent duplicates
+        const yearSelect = document.getElementById('year-select');
+        const monthSelect = document.getElementById('month-select');
+        const fontSelect = document.getElementById('font-select');
+        const themeSelect = document.getElementById('theme-select');
+        const printBtn = document.getElementById('print-calendar-btn');
+        const imageBtn = document.getElementById('generate-image-btn');
+
+        if (yearSelect && this.yearHandler) {
+            yearSelect.removeEventListener('change', this.yearHandler);
+        }
+        if (monthSelect && this.monthHandler) {
+            monthSelect.removeEventListener('change', this.monthHandler);
+        }
+        if (fontSelect && this.fontHandler) {
+            fontSelect.removeEventListener('change', this.fontHandler);
+        }
+        if (themeSelect && this.themeHandler) {
+            themeSelect.removeEventListener('change', this.themeHandler);
+        }
+        if (printBtn && this.printHandler) {
+            printBtn.removeEventListener('click', this.printHandler);
+        }
+        if (imageBtn && this.imageHandler) {
+            imageBtn.removeEventListener('click', this.imageHandler);
         }
     }
 
@@ -334,32 +373,122 @@ export class PrintableCalendar extends Game {
             style.id = 'print-styles-calendar';
             style.textContent = `
                 @media print {
-                    body { 
-                        -webkit-print-color-adjust: exact; 
-                        print-color-adjust: exact; 
+                    /* Hide everything by default */
+                    * {
+                        visibility: hidden !important;
                     }
-                    .no-print { 
-                        display: none !important; 
+                    
+                    /* Show only the printable calendar area */
+                    .printable-area,
+                    .printable-area * {
+                        visibility: visible !important;
                     }
-                    .printable-area { 
-                        margin: 0; 
-                        padding: 0; 
-                        border: none; 
-                        box-shadow: none; 
-                        height: 100vh; 
-                        width: 100vw; 
+                    
+                    /* Remove all backgrounds and styling from body and html */
+                    html, body {
+                        background: white !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        width: 100% !important;
+                        height: 100% !important;
+                        font-size: 12px !important;
+                    }
+                    
+                    /* Style the printable area */
+                    .printable-area {
+                        position: absolute !important;
+                        top: 0 !important;
+                        left: 0 !important;
+                        width: 100% !important;
+                        height: 100% !important;
+                        margin: 0 !important;
+                        padding: 15px !important;
+                        background: white !important;
+                        border: none !important;
+                        box-shadow: none !important;
+                        border-radius: 0 !important;
                         page-break-inside: avoid;
                     }
+                    
+                    /* Calendar container for print */
                     .printable-calendar-container {
-                        margin: 0;
-                        padding: 0;
-                        min-height: auto;
+                        background: white !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        min-height: auto !important;
+                        width: 100% !important;
+                        height: 100% !important;
                     }
+                    
+                    /* Hide controls when printing */
+                    .no-print {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                    
+                    /* Calendar header styling for print */
+                    .printable-area h1 {
+                        font-size: 48px !important;
+                        margin-bottom: 10px !important;
+                        text-align: center !important;
+                    }
+                    
+                    .printable-area p {
+                        font-size: 24px !important;
+                        margin-bottom: 20px !important;
+                        text-align: center !important;
+                    }
+                    
+                    /* Calendar grid for print */
+                    .printable-area .grid {
+                        width: 100% !important;
+                        margin: 0 !important;
+                    }
+                    
+                    /* Calendar days for print */
+                    .printable-area .grid > div {
+                        border: 1px solid #000 !important;
+                        min-height: 60px !important;
+                        padding: 5px !important;
+                        font-size: 14px !important;
+                    }
+                    
+                    /* Day headers */
+                    .printable-area .day-header {
+                        background: #f0f0f0 !important;
+                        font-weight: bold !important;
+                        text-align: center !important;
+                        padding: 8px !important;
+                        border: 1px solid #000 !important;
+                    }
+                    
                     /* Ensure colors print properly */
                     * {
                         -webkit-print-color-adjust: exact !important;
                         color-adjust: exact !important;
+                        print-color-adjust: exact !important;
                     }
+                    
+                    /* Remove any backdrop filters or gradients */
+                    .bg-white\\/80,
+                    .backdrop-blur-sm,
+                    .bg-gradient-to-br {
+                        background: white !important;
+                        backdrop-filter: none !important;
+                    }
+                    
+                    /* Unicorn image area for print */
+                    .printable-area .w-48,
+                    .printable-area .w-64 {
+                        width: 100px !important;
+                        height: 80px !important;
+                        margin: 10px auto !important;
+                    }
+                }
+                
+                @page {
+                    margin: 0.5in;
+                    size: landscape;
                 }
             `;
             document.head.appendChild(style);
@@ -371,11 +500,14 @@ export class PrintableCalendar extends Game {
         try {
             // Show print instructions
             const confirmed = confirm(
-                '🖨️ Ready to print your calendar!\n\n' +
-                '📋 Print Tips:\n' +
-                '• Use A4 paper for best results\n' +
-                '• Enable "Background graphics" in print settings\n' +
-                '• Choose "Landscape" orientation if needed\n\n' +
+                '🖨️ Ready to print your beautiful calendar!\n\n' +
+                '📋 Print Instructions:\n' +
+                '• Paper: A4 or Letter size\n' +
+                '• Orientation: LANDSCAPE (recommended)\n' +
+                '• In print dialog, click "More settings"\n' +
+                '• Enable "Background graphics"\n' +
+                '• Set margins to "Minimum"\n\n' +
+                '✨ The calendar will print cleanly without page backgrounds!\n\n' +
                 'Click OK to open print dialog!'
             );
             
@@ -383,8 +515,12 @@ export class PrintableCalendar extends Game {
             
             if (confirmed) {
                 console.log('🖨️ Calling window.print()...');
-                window.print();
-                console.log('✅ window.print() called successfully');
+                
+                // Small delay to ensure styles are applied
+                setTimeout(() => {
+                    window.print();
+                    console.log('✅ window.print() called successfully');
+                }, 100);
             } else {
                 console.log('ℹ️ User cancelled print');
             }
@@ -396,6 +532,8 @@ export class PrintableCalendar extends Game {
 
     cleanup() {
         console.log('PrintableCalendar cleanup called');
+        // Remove event listeners before cleanup
+        this.removeEventListeners();
         super.cleanup();
     }
 }
