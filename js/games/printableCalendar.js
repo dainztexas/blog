@@ -372,29 +372,41 @@ export class PrintableCalendar extends Game {
             const style = document.createElement('style');
             style.id = 'print-styles-calendar';
             style.textContent = `
+                @page {
+                    margin: 0.3in;
+                    size: landscape;
+                }
+                
                 @media print {
-                    /* Hide everything by default */
+                    /* Hide everything first */
                     * {
                         visibility: hidden !important;
                     }
                     
-                    /* Show only the printable calendar area */
+                    /* Hide the message box title completely */
+                    #messageBoxTitle {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                    
+                    /* Show only calendar content */
                     .printable-area,
                     .printable-area * {
                         visibility: visible !important;
                     }
                     
-                    /* Remove all backgrounds and styling from body and html */
+                    /* Reset page styling */
                     html, body {
                         background: white !important;
                         margin: 0 !important;
                         padding: 0 !important;
                         width: 100% !important;
                         height: 100% !important;
-                        font-size: 12px !important;
+                        font-size: 10px !important;
+                        overflow: hidden !important;
                     }
                     
-                    /* Style the printable area */
+                    /* Main calendar container */
                     .printable-area {
                         position: absolute !important;
                         top: 0 !important;
@@ -402,93 +414,130 @@ export class PrintableCalendar extends Game {
                         width: 100% !important;
                         height: 100% !important;
                         margin: 0 !important;
-                        padding: 15px !important;
+                        padding: 8px !important;
                         background: white !important;
                         border: none !important;
                         box-shadow: none !important;
                         border-radius: 0 !important;
-                        page-break-inside: avoid;
+                        page-break-inside: avoid !important;
+                        overflow: hidden !important;
                     }
                     
-                    /* Calendar container for print */
-                    .printable-calendar-container {
-                        background: white !important;
-                        margin: 0 !important;
+                    /* Calendar wrapper */
+                    .printable-area > div {
                         padding: 0 !important;
-                        min-height: auto !important;
+                        margin: 0 !important;
                         width: 100% !important;
                         height: 100% !important;
+                        background: white !important;
                     }
                     
-                    /* Hide controls when printing */
-                    .no-print {
-                        display: none !important;
-                        visibility: hidden !important;
+                    /* Header section */
+                    .printable-area .flex {
+                        margin-bottom: 8px !important;
+                        height: auto !important;
                     }
                     
-                    /* Calendar header styling for print */
+                    /* Month title */
                     .printable-area h1 {
-                        font-size: 48px !important;
-                        margin-bottom: 10px !important;
-                        text-align: center !important;
+                        font-size: 28px !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        line-height: 1 !important;
+                        color: #333 !important;
                     }
                     
+                    /* Year */
                     .printable-area p {
-                        font-size: 24px !important;
-                        margin-bottom: 20px !important;
-                        text-align: center !important;
+                        font-size: 16px !important;
+                        margin: 2px 0 0 0 !important;
+                        padding: 0 !important;
+                        color: #666 !important;
                     }
                     
-                    /* Calendar grid for print */
+                    /* Hide unicorn on print */
+                    .printable-area .w-32,
+                    .printable-area .w-40,
+                    .printable-area .lg\\:w-40 {
+                        display: none !important;
+                    }
+                    
+                    /* Calendar grid container */
                     .printable-area .grid {
                         width: 100% !important;
                         margin: 0 !important;
-                    }
-                    
-                    /* Calendar days for print */
-                    .printable-area .grid > div {
-                        border: 1px solid #000 !important;
-                        min-height: 60px !important;
-                        padding: 5px !important;
-                        font-size: 14px !important;
+                        border: 2px solid #000 !important;
+                        border-collapse: collapse !important;
                     }
                     
                     /* Day headers */
-                    .printable-area .day-header {
-                        background: #f0f0f0 !important;
+                    .printable-area .grid > div:nth-child(-n+7) {
+                        background: #f5f5f5 !important;
                         font-weight: bold !important;
                         text-align: center !important;
-                        padding: 8px !important;
+                        padding: 4px !important;
                         border: 1px solid #000 !important;
+                        font-size: 11px !important;
+                        height: 25px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
                     }
                     
-                    /* Ensure colors print properly */
+                    /* Calendar day cells */
+                    .printable-area .grid > div:nth-child(n+8) {
+                        border: 1px solid #333 !important;
+                        height: 70px !important;
+                        padding: 3px !important;
+                        font-size: 10px !important;
+                        background: white !important;
+                        vertical-align: top !important;
+                        position: relative !important;
+                    }
+                    
+                    /* Day numbers */
+                    .printable-area .grid span {
+                        font-weight: bold !important;
+                        font-size: 10px !important;
+                        color: #000 !important;
+                        display: block !important;
+                        line-height: 1 !important;
+                    }
+                    
+                    /* Remove all Tailwind backgrounds and effects */
+                    .bg-white\\/80,
+                    .backdrop-blur-sm,
+                    .bg-gradient-to-br,
+                    .rounded-3xl,
+                    .shadow-2xl {
+                        background: white !important;
+                        backdrop-filter: none !important;
+                        border-radius: 0 !important;
+                        box-shadow: none !important;
+                    }
+                    
+                    /* Ensure text colors are print-friendly */
+                    .text-transparent,
+                    .bg-clip-text {
+                        color: #333 !important;
+                        background: none !important;
+                        -webkit-background-clip: unset !important;
+                        background-clip: unset !important;
+                    }
+                    
+                    /* Ensure calendar fits on one page */
+                    .grid-cols-7 {
+                        display: grid !important;
+                        grid-template-columns: repeat(7, 1fr) !important;
+                        width: 100% !important;
+                    }
+                    
+                    /* Force color printing */
                     * {
                         -webkit-print-color-adjust: exact !important;
                         color-adjust: exact !important;
                         print-color-adjust: exact !important;
                     }
-                    
-                    /* Remove any backdrop filters or gradients */
-                    .bg-white\\/80,
-                    .backdrop-blur-sm,
-                    .bg-gradient-to-br {
-                        background: white !important;
-                        backdrop-filter: none !important;
-                    }
-                    
-                    /* Unicorn image area for print */
-                    .printable-area .w-48,
-                    .printable-area .w-64 {
-                        width: 100px !important;
-                        height: 80px !important;
-                        margin: 10px auto !important;
-                    }
-                }
-                
-                @page {
-                    margin: 0.5in;
-                    size: landscape;
                 }
             `;
             document.head.appendChild(style);
@@ -503,11 +552,12 @@ export class PrintableCalendar extends Game {
                 '🖨️ Ready to print your beautiful calendar!\n\n' +
                 '📋 Print Instructions:\n' +
                 '• Paper: A4 or Letter size\n' +
-                '• Orientation: LANDSCAPE (recommended)\n' +
+                '• Orientation: LANDSCAPE (automatic)\n' +
                 '• In print dialog, click "More settings"\n' +
                 '• Enable "Background graphics"\n' +
                 '• Set margins to "Minimum"\n\n' +
-                '✨ The calendar will print cleanly without page backgrounds!\n\n' +
+                '✨ Perfect fit: One page, clean layout, no extra content!\n' +
+                '🗓️ Only the calendar will print - no titles or backgrounds!\n\n' +
                 'Click OK to open print dialog!'
             );
             
