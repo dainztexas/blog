@@ -231,9 +231,14 @@ export class PrintableCalendar extends Game {
             // Print button
             const printBtn = document.getElementById('print-calendar-btn');
             if (printBtn) {
-                printBtn.addEventListener('click', () => {
+                console.log('✅ Print button found, adding event listener');
+                printBtn.addEventListener('click', (e) => {
+                    console.log('🖨️ Print button clicked!');
+                    e.preventDefault();
                     this.printCalendar();
                 });
+            } else {
+                console.error('❌ Print button not found!');
             }
 
             // Image generation button (disabled)
@@ -307,6 +312,8 @@ export class PrintableCalendar extends Game {
     updateTheme() {
         // Re-render with new theme
         this.render();
+        // Re-bind events after re-rendering
+        this.bindEvents();
     }
 
     addGoogleFonts() {
@@ -360,6 +367,7 @@ export class PrintableCalendar extends Game {
     }
 
     printCalendar() {
+        console.log('🖨️ printCalendar() function called');
         try {
             // Show print instructions
             const confirmed = confirm(
@@ -371,11 +379,17 @@ export class PrintableCalendar extends Game {
                 'Click OK to open print dialog!'
             );
             
+            console.log('User confirmed print:', confirmed);
+            
             if (confirmed) {
+                console.log('🖨️ Calling window.print()...');
                 window.print();
+                console.log('✅ window.print() called successfully');
+            } else {
+                console.log('ℹ️ User cancelled print');
             }
         } catch (error) {
-            console.error('Error printing calendar:', error);
+            console.error('❌ Error printing calendar:', error);
             alert('❌ Oops! There was an issue opening the print dialog. Please try again.');
         }
     }
