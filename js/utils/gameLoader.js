@@ -13,6 +13,7 @@ import { MemoryMatchGame } from '../games/memoryMatch.js';
 import { NumberExplorerGame } from '../games/numberExplorer.js';
 import { ThemeSelector } from '../games/themeSelector.js';
 import { Calendar } from '../games/calendar.js';
+import { PrintableCalendar } from '../games/printableCalendar.js';
 
 export class GameLoader {
     constructor(messageBoxTitle, gameContentArea, themeManager) {
@@ -32,6 +33,7 @@ export class GameLoader {
             ['memory-match', MemoryMatchGame],
             ['number-explorer', NumberExplorerGame],
             ['calendar', Calendar],
+            ['printable-calendar', PrintableCalendar],
             ['theme-selector', ThemeSelector]
         ]);
     }
