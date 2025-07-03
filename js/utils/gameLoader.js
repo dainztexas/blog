@@ -12,6 +12,7 @@ import { ShapeSorterGame } from '../games/shapeSorter.js';
 import { MemoryMatchGame } from '../games/memoryMatch.js';
 import { NumberExplorerGame } from '../games/numberExplorer.js';
 import { ThemeSelector } from '../games/themeSelector.js';
+import { Calendar } from '../games/calendar.js';
 
 export class GameLoader {
     constructor(messageBoxTitle, gameContentArea, themeManager) {
@@ -30,6 +31,7 @@ export class GameLoader {
             ['shape-sorter', ShapeSorterGame],
             ['memory-match', MemoryMatchGame],
             ['number-explorer', NumberExplorerGame],
+            ['calendar', Calendar],
             ['theme-selector', ThemeSelector]
         ]);
     }
