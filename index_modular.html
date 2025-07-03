@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids' Fun Zone</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tone.js CDN for Music Maker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    
+    <!-- External CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/games.css">
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="main-header bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-6 shadow-lg rounded-b-2xl">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+                <span class="block">🚀 DNZ Space 🎮</span>
+            </h1>
+            <p class="mt-2 text-lg md:text-xl opacity-90">Discover exciting games and apps!</p>
+        </div>
+    </header>
+
+    <!-- Main Content - Game/App Tiles -->
+    <main class="flex-grow container mx-auto px-4 py-8 md:py-12">
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 justify-center">
+            
+            <!-- Story Time Adventures -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-purple-500"
+                 data-title="Story Time Adventures" 
+                 data-description="Embark on magical story journeys!" 
+                 data-game-id="story-time-adventures">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/story_tile.png" alt="Story Book Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Story Time Adventures</h2>
+                    <p class="text-gray-600 text-center text-sm">Interactive stories for young readers.</p>
+                </div>
+            </div>
+
+            <!-- Guess the Number Game -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-indigo-500"
+                 data-title="Guess the Number" 
+                 data-description="Can you guess the secret number?" 
+                 data-game-id="guess-the-number">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/guess_number.png" alt="Question Mark Numbers Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Guess the Number</h2>
+                    <p class="text-gray-600 text-center text-sm">Guess the secret number from 1 to 100!</p>
+                </div>
+            </div>
+
+            <!-- Coloring Fun -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-green-500"
+                 data-title="Coloring Fun" 
+                 data-description="Unleash your creativity with colors!" 
+                 data-game-id="coloring-fun">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/colour.png" alt="Paint Palette Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Coloring Fun</h2>
+                    <p class="text-gray-600 text-center text-sm">Digital coloring book with many options.</p>
+                </div>
+            </div>
+
+            <!-- Animal Sounds -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-red-500"
+                 data-title="Animal Sounds" 
+                 data-description="Learn about animals and their sounds!" 
+                 data-game-id="animal-sounds">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/lion.png" alt="Lion Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Animal Sounds</h2>
+                    <p class="text-gray-600 text-center text-sm">Interactive app for animal recognition.</p>
+                </div>
+            </div>
+
+            <!-- Number Explorer -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-blue-500"
+                 data-title="Number Explorer" 
+                 data-description="Explore numbers and counting!" 
+                 data-game-id="number-explorer">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/numbers.png" alt="Numbers Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Number Explorer</h2>
+                    <p class="text-gray-600 text-center text-sm">Fun activities for learning numbers.</p>
+                </div>
+            </div>
+
+            <!-- Music Maker -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-yellow-500"
+                 data-title="Music Maker" 
+                 data-description="Create your own tunes and melodies!" 
+                 data-game-id="music-maker">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/music.png" alt="Music Notes Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Music Maker</h2>
+                    <p class="text-gray-600 text-center text-sm">Simple music creation for kids.</p>
+                </div>
+            </div>
+
+            <!-- Shape Sorter -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-pink-500"
+                 data-title="Shape Sorter" 
+                 data-description="Match shapes and learn geometry!" 
+                 data-game-id="shape-sorter">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/shapes.png" alt="Triangle Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Shape Sorter</h2>
+                    <p class="text-gray-600 text-center text-sm">Identify and sort different shapes.</p>
+                </div>
+            </div>
+
+            <!-- Memory Match -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-teal-500"
+                 data-title="Memory Match" 
+                 data-description="Test your memory with fun cards!" 
+                 data-game-id="memory-match">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/matching.png" alt="Brain Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Memory Match</h2>
+                    <p class="text-gray-600 text-center text-sm">Find matching pairs in this classic game.</p>
+                </div>
+            </div>
+
+            <!-- Theme Selector -->
+            <div class="game-tile bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer border-b-4 border-gray-400"
+                 data-title="Theme Selector" 
+                 data-description="Change the look of the Fun Zone!" 
+                 data-game-id="theme-selector">
+                <div class="flex flex-col items-center justify-center h-full">
+                    <img src="resources/images/theme.png" alt="Theme Icon" class="mb-4 rounded-xl shadow-md">
+                    <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">Theme Selector</h2>
+                    <p class="text-gray-600 text-center text-sm">Personalize your Fun Zone experience.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer bg-gray-800 text-white p-4 text-center rounded-t-2xl mt-8">
+        <p>&copy; 2025 Kids' Fun Zone. All rights reserved.</p>
+    </footer>
+
+    <!-- Message Box Container -->
+    <div id="messageBoxContainer" class="message-box-container" tabindex="-1">
+        <div class="message-box-content">
+            <h3 id="messageBoxTitle"></h3>
+            <!-- Area where specific game UI will be loaded -->
+            <div id="gameContentArea" class="game-content-area">
+                <!-- Game UI will be dynamically injected here -->
+            </div>
+            <button id="closeMessageBox" class="mt-6">Close</button>
+        </div>
+    </div>
+
+    <!-- Main Application Script -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

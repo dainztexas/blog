@@ -1,0 +1,80 @@
+/* Theme Styles for Kids' Fun Zone */
+
+/* Theme specific styles */
+.theme-rainbow {
+    background-color: #e0f2fe; /* Light blue */
+}
+
+.theme-rainbow .main-header {
+    background-image: linear-gradient(to right, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #9333ea); /* Rainbow gradient */
+}
+
+.theme-unicorn {
+    background-color: #fce7f3; /* Light pink */
+}
+
+.theme-unicorn .main-header {
+    background-image: linear-gradient(to right, #fbcfe8, #f0abfc, #d8b4fe); /* Pastel pink/purple */
+}
+
+.theme-chocolate {
+    background-color: #fef3c7; /* Creamy yellow */
+}
+
+.theme-chocolate .main-header {
+    background-image: linear-gradient(to right, #7c2d12, #9a3412, #b45309); /* Brown/orange */
+}
+
+.theme-carracing {
+    background-color: #e2e8f0; /* Light grey */
+}
+
+.theme-carracing .main-header {
+    background-image: linear-gradient(to right, #1f2937, #374151, #4b5563); /* Dark grey/black */
+}
+
+/* Styles for theme selection grid */
+.theme-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    justify-items: center;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.theme-option-card {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 3px solid #cbd5e1;
+}
+
+.theme-option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-color: #6366f1;
+}
+
+.theme-option-card .theme-preview-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 0.5rem;
+    margin-bottom: 0.75rem;
+    border: 2px solid #ccc;
+}
+
+.theme-option-card span {
+    font-weight: 600;
+    color: #4f46e5;
+    font-size: 1rem;
+}
